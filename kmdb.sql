@@ -137,3 +137,73 @@
 
 -- The SQL statement for the cast output
 -- TODO!
+
+.mode column
+.headers off
+
+DROP TABLE IF EXISTS actors;
+DROP TABLE IF EXISTS studios;
+DROP TABLE IF EXISTS movies;
+DROP TABLE IF EXISTS cast;
+
+CREATE TABLE actors (
+    actor_id INTEGER PRIMARY KEY,
+    name TEXT
+);
+
+CREATE TABLE studios (
+    studio_id INTEGER PRIMARY KEY,
+    name TEXT
+);
+
+CREATE TABLE movies (
+    movie_id INTEGER PRIMARY KEY,
+    title TEXT,
+    year_released INTEGER,
+    mpaa_rating TEXT,
+    studio_id
+);
+
+CREATE TABLE cast (
+    
+);
+
+INSERT INTO actors ("name") VALUES
+("Christian Bale"),
+("Michael Caine"),
+("Liam Neeson"),
+("Katie Holmes"),
+("Gary Oldman"),
+("Heath Ledger"),
+("Aaron Eckhart"),
+("Maggie Gyllenhaal"),
+("Tom Hardy"),
+("Joseph Gordon-Levitt"),
+("Anne Hathaway");
+
+INSERT INTO studios ("name") VALUES ("Warner Bros.");
+
+INSERT INTO movies ("title", "year_released", "mpaa_rating", "studio_id") VALUES 
+("Batman Begins", 2005, "PG-13", 1),
+("The Dark Knight", 2008, "PG-13", 1),
+("The Dark Knight Rises", 2012, "PG-13", 1);
+
+
+
+-- Prints a header for the movies output
+.print "Movies"
+.print "======"
+.print ""
+
+-- The SQL statement for the movies output
+-- TODO!
+
+-- Prints a header for the cast output
+.print ""
+.print "Top Cast"
+.print "========"
+.print ""
+
+
+-- The SQL statement for the cast output
+-- TODO!
