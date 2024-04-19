@@ -121,22 +121,15 @@
 -- TODO!
 
 -- Prints a header for the movies output
-.print "Movies"
-.print "======"
-.print ""
 
 -- The SQL statement for the movies output
 -- TODO!
 
 -- Prints a header for the cast output
-.print ""
-.print "Top Cast"
-.print "========"
-.print ""
-
 
 -- The SQL statement for the cast output
 -- TODO!
+
 
 .mode column
 .headers off
@@ -144,28 +137,30 @@
 DROP TABLE IF EXISTS actors;
 DROP TABLE IF EXISTS studios;
 DROP TABLE IF EXISTS movies;
-DROP TABLE IF EXISTS cast;
+DROP TABLE IF EXISTS casts;
 
 CREATE TABLE actors (
-    actor_id INTEGER PRIMARY KEY,
+    actor_id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT
 );
 
 CREATE TABLE studios (
-    studio_id INTEGER PRIMARY KEY,
+    studio_id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT
 );
 
 CREATE TABLE movies (
-    movie_id INTEGER PRIMARY KEY,
+    movie_id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT,
     year_released INTEGER,
     mpaa_rating TEXT,
-    studio_id
+    studio_id INTEGER
 );
 
-CREATE TABLE cast (
-    
+CREATE TABLE casts (
+movie_id INTEGER,
+actor_id INTEGER,
+character_name TEXT  
 );
 
 INSERT INTO actors ("name") VALUES
@@ -188,7 +183,22 @@ INSERT INTO movies ("title", "year_released", "mpaa_rating", "studio_id") VALUES
 ("The Dark Knight", 2008, "PG-13", 1),
 ("The Dark Knight Rises", 2012, "PG-13", 1);
 
-
+INSERT INTO casts ("movie_id", "actor_id", "character_name") VALUES 
+(1, 1, "Bruce Wayne"),
+(1, 2, "Alfred"),
+(1, 3, "Ra's Al Ghul"),
+(1, 4, "Rachel Dawes"),
+(1, 5, "Commissioner Gordon"),
+(2, 1, "Bruce Wayne"),
+(2, 6, "Joker"),
+(2, 7, "Harvey Dent"),
+(2, 2, "Alfred"),
+(2, 8, "Rachel Dawes"),
+(3, 1, "Bruce Wayne"),
+(3, 5, "Commissioner Gordon"),
+(3, 9, "Bane"),
+(3, 10, "John Blake"),
+(3, 11,"Selina Kyle");
 
 -- Prints a header for the movies output
 .print "Movies"
@@ -196,14 +206,17 @@ INSERT INTO movies ("title", "year_released", "mpaa_rating", "studio_id") VALUES
 .print ""
 
 -- The SQL statement for the movies output
--- TODO!
+SELECT title, year_released, mpaa_rating, studios.name
+FROM movies
+INNER JOIN studios on movies.studio_id = studios.studio_id;
 
--- Prints a header for the cast output
+-- Prints a header for the casts output
 .print ""
 .print "Top Cast"
 .print "========"
 .print ""
 
-
--- The SQL statement for the cast output
--- TODO!
+SELECT movies.title, actors.name, character_name 
+FROM casts
+INNER JOIN movies on casts.movie_id = movies.movie_id
+INNER JOIN actors on casts.actor_id = actors.actor_id;
